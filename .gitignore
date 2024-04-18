@@ -1,3 +1,5 @@
 api/node_modules
 api/db/app.db
 api/.env
+api/package.json
+api/package-lock.json
