@@ -5,6 +5,7 @@
   "description": "",
   "main": "dist/src/server.js",
   "scripts": {
+    "start": "node src/server",
     "build": "tsc",
     "dev": "tsx watch src/server.ts",
     "knex": "node --no-warnings --import tsx ./node_modules/.bin/knex"

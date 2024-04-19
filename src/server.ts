@@ -1,24 +1,29 @@
-import fastifyCors from '@fastify/cors';
-import fastify from 'fastify';
-import { authenticateRoutes } from './routes/authenticateRoutes';
-import { mealsRoutes } from './routes/mealsRoutes';
-import { userRoutes } from './routes/userRoutes';
+import fastifyCors from "@fastify/cors";
+import Fastify from "fastify";
+import { env } from "./env";
+import { authenticateRoutes } from "./routes/authenticateRoutes";
+import { mealsRoutes } from "./routes/mealsRoutes";
+import { userRoutes } from "./routes/userRoutes";
 
+const app = Fastify({ logger: true });
+const port = Number(env.PORT);
 
-const app = fastify({ logger: true })
-
-app.register(fastifyCors)
-app.register(authenticateRoutes)
+app.register(fastifyCors);
+app.register(authenticateRoutes);
 app.register(userRoutes, {
-  prefix: "user"
-})
+  prefix: "user",
+});
 app.register(mealsRoutes, {
   prefix: "meals",
-})
+});
 
+const start = async () => {
+  try {
+    await app.listen({ port });
+  } catch (err) {
+    app.log.error(err);
+    process.exit(1);
+  }
+};
 
-
-app.listen({
-  port: 3333,
-  host: '0.0.0.0'
-})
+start();
