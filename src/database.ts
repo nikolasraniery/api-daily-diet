@@ -1,10 +1,11 @@
 import setupKnex, { Knex } from "knex";
-import { env } from "./env";
 
 export const config: Knex.Config = {
-  client: "sqlite",
+  client: "postgresql",
   connection: {
-    filename: env.DATABASE_URL,
+    database: process.env.DATABASE_URL,
+    user: process.env.USERNAME,
+    password: process.env.PASSWORD,
   },
   useNullAsDefault: true,
   migrations: {
